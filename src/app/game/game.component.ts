@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingHarness } from '@angular/router/testing';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
@@ -19,6 +21,7 @@ export class GameComponent implements OnInit {
   normal = [1,2,3,4,5,6,7,8,9];
   orgData : any = [];
   validData : any = [];
+  leveler : number = 1;
   gamedata:any = [
     [0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0],
@@ -53,8 +56,8 @@ export class GameComponent implements OnInit {
     const seconds = this.totalSeconds % 60;
     return `${minutes}.${seconds < 10 ? '0' + seconds : seconds}`;
   }
-  levelChanger(num : number){
-    this.generateSudoku(num);
+  levelChanger(){
+    this.generateSudoku(this.leveler);
   }
   generateSudoku(level : number): number[][] {
     const grid: number[][] = Array.from({ length: 9 }, () => Array(9).fill(0));
@@ -166,8 +169,29 @@ export class GameComponent implements OnInit {
       this.gamedata[this.points[0]][this.points[1]] = num;
       if(this.gamedata[this.points[0]][this.points[1]] != this.orgData[this.points[0]][this.points[1]]){
         this.mistake_count = this.mistake_count +1;
+        if(this.mistake_count>5){
+          alert('YOu loSe!!!')
+          this.generateSudoku(this.leveler);
+          this.mistake_count = 0;
+        }
       }
     }
+    this.winAlert()
+  }
+
+  winAlert(){
+    for(let i=0;i<this.orgData.length;i++){
+      for(let j=0;j<this.orgData[i].length;j++){
+        if(this.orgData[i][j]!=this.gamedata[i][j]){
+          return
+        }
+      }
+    }
+    alert('you Win The Game!!!');
+    let status = confirm("Do u WanT to IncrEase the LeVEl???")
+    this.leveler = status? this.leveler+1: this.leveler;
+    this.generateSudoku(this.leveler);
+    this.mistake_count = 0;
   }
   
 }

@@ -1,7 +1,7 @@
 <div class="container">
 <div class="header">
   <div>
-   <h4>Mistakes : {{mistake_count}}</h4>
+   <h4>Mistakes :{{mistake_count}}</h4>
   </div>
   <div>
    <p>Timer : {{ formatTime() }}</p>
@@ -13,9 +13,9 @@
  </div>
  <div>
   <label for="level">Level : </label>
-  <select name="level" id="level">
+  <select name="level" id="level" [(ngModel)]="leveler" (change)="levelChanger()">
    @for (item of level; track $index) {
-    <option [value]="item" (click)="levelChanger(item)">{{item}}</option>
+    <option [value]="item">{{item}}</option>
    }
   </select>
  </div>
