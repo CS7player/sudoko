@@ -1,0 +1,53 @@
+.container {
+ width: 100vw;
+ height: 100vh;
+ background-color: rgb(117, 115, 115);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ row-gap: 1rem;
+}
+
+.header{
+ display: flex;
+ column-gap: 1rem;
+}
+
+.content{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ row-gap: 1rem;
+}
+
+button{
+ padding: 0.2rem 0.4rem;
+}
+
+.main_btn{
+ width: 2.4rem;
+ height: 2.4rem;
+ font-size: 1.7rem;
+ font-weight: 700;
+}
+
+.btn{
+ height: 2rem;
+ width: 2rem;
+ color : black;
+ font-size: 1.2rem;
+}
+
+.highlight{
+ border: 0.1rem black solid ;
+ /* background-color: rgb(20, 20, 109); */
+}
+
+.correct{
+    color:green;
+}
+.wrong{
+    color: red;
+}

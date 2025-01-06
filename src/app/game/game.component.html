@@ -1,0 +1,51 @@
+<div class="container">
+<div class="header">
+  <div>
+   <h4>Mistakes : {{mistake_count}}</h4>
+  </div>
+  <div>
+   <p>Timer : {{ formatTime() }}</p>
+ </div>
+ <div>
+  <button (click)="startTimer()"><i class="fa-solid fa-play"></i></button>
+  <button (click)="stopTimer()"><i class="fa-solid fa-pause"></i></button>
+  <button (click)="resetTimer()"><i class="fa-solid fa-rotate-left"></i></button>
+ </div>
+ <div>
+  <label for="level">Level : </label>
+  <select name="level" id="level">
+   @for (item of level; track $index) {
+    <option [value]="item" (click)="levelChanger(item)">{{item}}</option>
+   }
+  </select>
+ </div>
+</div>
+<div class="content">
+ <div>
+  @for (item of normal; track $index) {
+   <button class="main_btn" (click)="selected(item)">{{item}}</button>
+  }
+ </div>
+ <div>
+ <table>
+  @for (item of gamedata; track $index;let i=$index) {
+   <tr>
+    @for (item of item; track $index;let j=$index) {
+     <td>
+      <button [ngClass]="classCreator(i,j)"
+              (click)="test(i,j)"
+              [disabled]="valid(i,j)">
+              {{[0,'@'].includes(item) ? '': item}}
+      </button>
+      @if ([2,5].includes(j)){&nbsp;}
+     </td>
+    }
+   </tr>
+   @if ([2,5].includes(i)) {
+    <hr>
+   }
+  }
+ </table>
+</div>
+</div>
+</div>
